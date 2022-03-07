@@ -32,7 +32,7 @@ Free for private or public use. No warranty is implied or expressed.
 
 *******************************************************************************************/
 
-package GrillMonkey2;
+package GrillMonkey2.Engine;
 import java.util.*;
 
 public class LuhnChecksum

@@ -11,7 +11,7 @@ Code copied from WidlerSuite, a project also by this author.
 
 */
 
-package GrillMonkey2;
+package GrillMonkey2.Engine;
 
 public class SquirrelRNG
 {

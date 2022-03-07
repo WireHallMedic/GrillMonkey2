@@ -1,4 +1,4 @@
-package GrillMonkey2;
+package GrillMonkey2.GUI;
 
 import java.awt.event.*;
 import javax.swing.*;

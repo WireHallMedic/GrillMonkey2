@@ -1,4 +1,4 @@
-package GrillMonkey2;
+package GrillMonkey2.Engine;
 
 public class GameState
 {

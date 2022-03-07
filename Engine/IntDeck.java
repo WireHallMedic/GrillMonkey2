@@ -7,7 +7,7 @@ Code adapted from WidlerSuite, a project also by this author.
 
 */
 
-package GrillMonkey2;
+package GrillMonkey2.Engine;
 
 import java.util.*;
 

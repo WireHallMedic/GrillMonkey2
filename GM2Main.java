@@ -2,6 +2,8 @@
 package GrillMonkey2;
 
 import javax.swing.*;
+import GrillMonkey2.GUI.*;
+import GrillMonkey2.Engine.*;
 
 public class GM2Main
 {

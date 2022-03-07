@@ -1,6 +1,4 @@
-
-
-package GrillMonkey2;
+package GrillMonkey2.GUI;
 
 import javax.swing.*;
 import java.util.*;
