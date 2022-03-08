@@ -72,7 +72,7 @@ public class Board implements GM2Constants
    
    private MatchObj getMatchObj(int xStart, int yStart, int length, boolean isVertical)
    {
-      MatchObj match = new MatchObj(xStart, yStart, null, length);
+      MatchObj match = new MatchObj(xStart, yStart, null, length, isVertical);
       if(isVertical)
       {
          for(int y = yStart; y < xStart + length; y++)
