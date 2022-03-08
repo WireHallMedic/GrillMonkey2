@@ -21,4 +21,9 @@ public class MatchObj
       tileType = tt;
       length = l;
    }
+   
+   public String serialize()
+   {
+      return String.format("MatchObj([%d, %d], length %d, type %s)", xLoc, yLoc, length, tileType.str);
+   }
 }

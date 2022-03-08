@@ -1,6 +1,7 @@
 package GrillMonkey2.Engine;
 
 import GrillMonkey2.*;
+import java.util.*;
 
 public class Board implements GM2Constants
 {
@@ -19,6 +20,13 @@ public class Board implements GM2Constants
       {
          this.tile[x][y] = that.tile[x][y];
       }
+   }
+   
+   public Tile getTile(int x, int y)
+   {
+      if(x >= 0 && y < BOARD_WIDTH && y >= 0 && y < BOARD_HEIGHT)
+         return tile[x][y];
+      return null;
    }
    
    public boolean hasMatch()
@@ -62,6 +70,83 @@ public class Board implements GM2Constants
       return false;
    }
    
+   private MatchObj getMatchObj(int xStart, int yStart, int length, boolean isVertical)
+   {
+      MatchObj match = new MatchObj(xStart, yStart, null, length);
+      if(isVertical)
+      {
+         for(int y = yStart; y < xStart + length; y++)
+         {
+            if(getTile(xStart, y) != Tile.BACON)
+            {
+               match.tileType = getTile(xStart, y);
+               break;
+            }
+         }
+      }
+      else
+      {
+         for(int x = xStart; x < xStart + length; x++)
+         {
+            if(getTile(x, yStart) != Tile.BACON)
+            {
+               match.tileType = getTile(x, yStart);
+               break;
+            }
+         }
+      }
+      return match;
+   }
+   
+   public Vector<MatchObj> getMatches()
+   {
+      Vector<MatchObj> matchList = getVerticalMatches();
+      matchList.addAll(getHorizontalMatches());
+      return matchList;
+   }
+   
+   private Vector<MatchObj> getVerticalMatches()
+   {      
+      Vector<MatchObj> matchList = new Vector<MatchObj>();
+      for(int x = 0; x < BOARD_WIDTH; x++)
+      {
+         int matchCounter = 0;
+         for(int y = 0; y < BOARD_HEIGHT - 1; y++)
+         {
+            if(tile[x][y].matches(tile[x][y + 1]))
+               matchCounter++;
+            else
+            {
+               if(matchCounter >= 2)
+                  matchList.add(getMatchObj(x, y - matchCounter, matchCounter + 1, true));
+               matchCounter = 0;
+            }
+         }
+      }
+      return matchList;
+   }
+   
+   private Vector<MatchObj> getHorizontalMatches()
+   {      
+      Vector<MatchObj> matchList = new Vector<MatchObj>();
+      for(int y = 0; y < BOARD_HEIGHT; y++)
+      {
+         int matchCounter = 0;
+         for(int x = 0; x < BOARD_WIDTH - 1; x++)
+         {
+            if(tile[x][y].matches(tile[x + 1][y]))
+               matchCounter++;
+            else
+            {
+               if(matchCounter >= 2)
+                  matchList.add(getMatchObj(x - matchCounter, y, matchCounter + 1, false));
+               matchCounter = 0;
+            }
+         }
+      }
+      return matchList;
+   }
+   
    public void dump()
    {
       for(int y = 0; y < BOARD_HEIGHT; y++)
@@ -71,6 +156,15 @@ public class Board implements GM2Constants
             System.out.print("" + tile[x][y].ordinal());
          }
          System.out.println();
+      }
+   }
+   
+   public void dumpMatchList()
+   {
+      Vector<MatchObj> list = getMatches();
+      for(MatchObj entry: list)
+      {
+         System.out.println(entry.serialize());
       }
    }
    
@@ -109,29 +203,39 @@ public class Board implements GM2Constants
       bothMatch.tile[5][4] = Tile.BREAD;
       bothMatch.tile[4][3] = Tile.BREAD;
       bothMatch.tile[4][5] = Tile.BREAD;
+      bothMatch.tile[4][6] = Tile.BREAD;
+      bothMatch.tile[4][2] = Tile.BACON;
       
       System.out.println("BoardTemplate:");
       boardTemplate.dump();
       System.out.println("Expecting False: " + boardTemplate.hasMatch());
       System.out.println("Expecting False: " + boardTemplate.hasVerticalMatch());
       System.out.println("Expecting False: " + boardTemplate.hasHorizontalMatch());
+      System.out.println("MatchList:");
+      boardTemplate.dumpMatchList();
       
       System.out.println("\nvertical match:");
       vertMatch.dump();
       System.out.println("Expecting True: " + vertMatch.hasMatch());
       System.out.println("Expecting True: " + vertMatch.hasVerticalMatch());
       System.out.println("Expecting False: " + vertMatch.hasHorizontalMatch());
+      System.out.println("MatchList:");
+      vertMatch.dumpMatchList();
       
       System.out.println("\nhorizontal match:");
       horizMatch.dump();
       System.out.println("Expecting True: " + horizMatch.hasMatch());
       System.out.println("Expecting False: " + horizMatch.hasVerticalMatch());
       System.out.println("Expecting True: " + horizMatch.hasHorizontalMatch());
+      System.out.println("MatchList:");
+      horizMatch.dumpMatchList();
       
       System.out.println("\nboth match:");
       bothMatch.dump();
       System.out.println("Expecting True: " + bothMatch.hasMatch());
       System.out.println("Expecting True: " + bothMatch.hasVerticalMatch());
       System.out.println("Expecting True: " + bothMatch.hasHorizontalMatch());
+      System.out.println("MatchList: \n");
+      bothMatch.dumpMatchList();
    }
 }
