@@ -22,11 +22,36 @@ public class Board implements GM2Constants
       }
    }
    
+   public boolean isInBounds(int x, int y)
+   {
+      return x >= 0 && y < BOARD_WIDTH && y >= 0 && y < BOARD_HEIGHT;
+   }
+   
    public Tile getTile(int x, int y)
    {
-      if(x >= 0 && y < BOARD_WIDTH && y >= 0 && y < BOARD_HEIGHT)
+      if(isInBounds(x, y))
          return tile[x][y];
       return null;
+   }
+   
+   public boolean swapTiles(int x1, int y1, int x2, int y2)
+   {
+      if(isInBounds(x1, y1) && isInBounds(x2, y2))
+      {
+         Tile swapTile = tile[x1][y1];
+         tile[x1][y1] = tile[x2][y2];
+         tile[x2][y2] = swapTile;
+         return true;
+      }
+      else
+         return false;
+   }
+   
+   public boolean swapMakesMatch(int x1, int y1, int x2, int y2)
+   {
+      Board testBoard = new Board(this);
+      testBoard.swapTiles(x1, y1, x2, y2);
+      return testBoard.hasMatch();
    }
    
    public boolean hasMatch()
@@ -237,5 +262,12 @@ public class Board implements GM2Constants
       System.out.println("Expecting True: " + bothMatch.hasHorizontalMatch());
       System.out.println("MatchList: \n");
       bothMatch.dumpMatchList();
+      
+      System.out.println("\nSwap Test: [1, 1], [1. 2] of boardTemplate");
+      System.out.println("Expecting True: " + boardTemplate.swapMakesMatch(1, 1, 1, 2));
+      
+      System.out.println("\nSwap Test: [1, 1], [1. 3] of boardTemplate");
+      System.out.println("Expecting False: " + boardTemplate.swapMakesMatch(1, 1, 1, 3));
+      
    }
 }
