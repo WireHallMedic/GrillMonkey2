@@ -12,10 +12,11 @@ s#i0
 s#k0
 s#j0
 s#l0
-!293;g
+!316;g
 %\011GUI%sLayoutPanel.java
 %\011Engine%sGameState.java
 %\011Engine%sLuhnChecksum.java
+%\011Engine%sTile.java
 %\011Engine%sIntDeck.java
 %\011GUI%sScorePanel.java
 %\011GUI%sMenuPanel.java
@@ -24,10 +25,11 @@ s#l0
 %\011GUI%sAboutPanel.java
 %\011Engine%sSquirrelRNG.java
 %\011GUI%sGamePanel.java
-!293;f
+!316;f
 %\011GUI%sLayoutPanel.java
 %\011Engine%sGameState.java
 %\011Engine%sLuhnChecksum.java
+%\011Engine%sTile.java
 %\011Engine%sIntDeck.java
 %\011GUI%sScorePanel.java
 %\011GUI%sMenuPanel.java
