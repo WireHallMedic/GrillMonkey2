@@ -4,11 +4,11 @@ import GrillMonkey2.*;
 
 public class GameState implements GM2Constants
 {
-   private Tile[][] board;
+   private Board board;
    
    public GameState()
    {
-      board = new Tile[BOARD_WIDTH][BOARD_HEIGHT];
+      board = new Board();
    }
    
    
