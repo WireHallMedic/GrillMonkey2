@@ -5,7 +5,7 @@ import java.util.*;
 
 public class Board implements GM2Constants
 {
-   private Tile[][] tile;
+   protected Tile[][] tile;
    
    public Board()
    {
@@ -34,6 +34,12 @@ public class Board implements GM2Constants
       return null;
    }
    
+   public void setTile(int x, int y, Tile t)
+   {
+      if(isInBounds(x, y))
+         tile[x][y] = t;
+   }
+   
    public boolean swapTiles(int x1, int y1, int x2, int y2)
    {
       if(isInBounds(x1, y1) && isInBounds(x2, y2))
@@ -59,7 +65,7 @@ public class Board implements GM2Constants
       return hasVerticalMatch() || hasHorizontalMatch();
    }
    
-   private boolean hasVerticalMatch()
+   protected boolean hasVerticalMatch()
    {      
       for(int x = 0; x < BOARD_WIDTH; x++)
       {
@@ -77,7 +83,7 @@ public class Board implements GM2Constants
       return false;
    }
    
-   private boolean hasHorizontalMatch()
+   protected boolean hasHorizontalMatch()
    {      
       for(int y = 0; y < BOARD_HEIGHT; y++)
       {
@@ -95,7 +101,7 @@ public class Board implements GM2Constants
       return false;
    }
    
-   private MatchObj getMatchObj(int xStart, int yStart, int length, boolean isVertical)
+   protected MatchObj getMatchObj(int xStart, int yStart, int length, boolean isVertical)
    {
       MatchObj match = new MatchObj(xStart, yStart, null, length, isVertical);
       if(isVertical)
@@ -130,7 +136,7 @@ public class Board implements GM2Constants
       return matchList;
    }
    
-   private Vector<MatchObj> getVerticalMatches()
+   protected Vector<MatchObj> getVerticalMatches()
    {      
       Vector<MatchObj> matchList = new Vector<MatchObj>();
       for(int x = 0; x < BOARD_WIDTH; x++)
@@ -151,7 +157,7 @@ public class Board implements GM2Constants
       return matchList;
    }
    
-   private Vector<MatchObj> getHorizontalMatches()
+   protected Vector<MatchObj> getHorizontalMatches()
    {      
       Vector<MatchObj> matchList = new Vector<MatchObj>();
       for(int y = 0; y < BOARD_HEIGHT; y++)
