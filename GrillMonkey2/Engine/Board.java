@@ -24,7 +24,7 @@ public class Board implements GM2Constants
    
    public boolean isInBounds(int x, int y)
    {
-      return x >= 0 && y < BOARD_WIDTH && y >= 0 && y < BOARD_HEIGHT;
+      return x >= 0 && x < BOARD_WIDTH && y >= 0 && y < BOARD_HEIGHT;
    }
    
    public Tile getTile(int x, int y)
@@ -184,7 +184,10 @@ public class Board implements GM2Constants
       {
          for(int x = 0; x < BOARD_WIDTH; x++)
          {
-            System.out.print("" + tile[x][y].ordinal());
+            if(tile[x][y] == null)
+               System.out.print("!");
+            else
+               System.out.print("" + tile[x][y].ordinal());
          }
          System.out.println();
       }

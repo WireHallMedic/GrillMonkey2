@@ -8,7 +8,10 @@ import org.junit.Test;
 
 public class BoardTest extends Board
 {
-   Board boardTemplate;
+   private Board boardTemplate;      
+   private Board vertMatch;
+   private Board horizMatch;
+   private Board bothMatch;
    
    @Before public void setUp()
    {
@@ -28,21 +31,10 @@ public class BoardTest extends Board
             boardTemplate.setTile(x, y + 1, Tile.BEEF);
          }
       }
-   }
-
-
-   /** A test that always fails. **/
-   @Test public void defaultTest() {
-      Assert.assertEquals("Default test added by jGRASP. Delete "
-            + "this test once you have added your own.", 0, 0);
-   }
-   
-   @Test public void testVerticalMatches()
-   {
       
-      Board vertMatch = new Board(boardTemplate);
-      Board horizMatch = new Board(boardTemplate);
-      Board bothMatch = new Board(boardTemplate);
+      vertMatch = new Board(boardTemplate);
+      horizMatch = new Board(boardTemplate);
+      bothMatch = new Board(boardTemplate);
       
       vertMatch.setTile(4, 4, Tile.BREAD);
       vertMatch.setTile(4, 5, Tile.BREAD);
@@ -57,44 +49,49 @@ public class BoardTest extends Board
       bothMatch.setTile(4, 5, Tile.BREAD);
       bothMatch.setTile(4, 6, Tile.BREAD);
       bothMatch.setTile(4, 2, Tile.BACON);
-      
-      System.out.println("BoardTemplate:");
-      boardTemplate.dump();
-      System.out.println("Expecting False: " + boardTemplate.hasMatch());
-      System.out.println("Expecting False: " + boardTemplate.hasVerticalMatch());
-      System.out.println("Expecting False: " + boardTemplate.hasHorizontalMatch());
-      System.out.println("MatchList:");
-      boardTemplate.dumpMatchList();
-      
-      System.out.println("\nvertical match:");
-      vertMatch.dump();
-      System.out.println("Expecting True: " + vertMatch.hasMatch());
-      System.out.println("Expecting True: " + vertMatch.hasVerticalMatch());
-      System.out.println("Expecting False: " + vertMatch.hasHorizontalMatch());
-      System.out.println("MatchList:");
-      vertMatch.dumpMatchList();
-      
-      System.out.println("\nhorizontal match:");
-      horizMatch.dump();
-      System.out.println("Expecting True: " + horizMatch.hasMatch());
-      System.out.println("Expecting False: " + horizMatch.hasVerticalMatch());
-      System.out.println("Expecting True: " + horizMatch.hasHorizontalMatch());
-      System.out.println("MatchList:");
-      horizMatch.dumpMatchList();
-      
-      System.out.println("\nboth match:");
-      bothMatch.dump();
-      System.out.println("Expecting True: " + bothMatch.hasMatch());
-      System.out.println("Expecting True: " + bothMatch.hasVerticalMatch());
-      System.out.println("Expecting True: " + bothMatch.hasHorizontalMatch());
-      System.out.println("MatchList: \n");
-      bothMatch.dumpMatchList();
-      
-      System.out.println("\nSwap Test: [1, 1], [1. 2] of boardTemplate");
-      System.out.println("Expecting True: " + boardTemplate.swapMakesMatch(1, 1, 1, 2));
-      
-      System.out.println("\nSwap Test: [1, 1], [1. 3] of boardTemplate");
-      System.out.println("Expecting False: " + boardTemplate.swapMakesMatch(1, 1, 1, 3));
-      
+   }
+   
+   @Test public void testVerticalMatches()
+   {
+      Assert.assertEquals("No vertical matches detected when no matches present.", 
+         false, boardTemplate.hasVerticalMatch());
+      Assert.assertEquals("No vertical matches detected when only horizontal matches present.", 
+         false, horizMatch.hasVerticalMatch());
+      Assert.assertEquals("Vertical matches detected when only vertical matches present.", 
+         true, vertMatch.hasVerticalMatch());
+      Assert.assertEquals("Vertical matches detected when both match types present, with bacon.", 
+         true, bothMatch.hasVerticalMatch());
+   }
+   
+   @Test public void testHorizontalMatches()
+   {
+      Assert.assertEquals("No horizontal matches detected when no matches present.", 
+         false, boardTemplate.hasVerticalMatch());
+      Assert.assertEquals("Horizontal matches detected when only horizontal matches present.", 
+         true, horizMatch.hasHorizontalMatch());
+      Assert.assertEquals("No horizontal matches detected when only vertical matches present.", 
+         false, vertMatch.hasHorizontalMatch());
+      Assert.assertEquals("Horizontal matches detected when both match types present, with bacon.", 
+         true, bothMatch.hasHorizontalMatch());
+   }
+   
+   @Test public void testBiaxialMatches()
+   {
+      Assert.assertEquals("No matches detected when no matches present.", 
+         false, boardTemplate.hasMatch());
+      Assert.assertEquals("Matches detected when only horizontal matches present.", 
+         true, horizMatch.hasMatch());
+      Assert.assertEquals("Matches detected when only vertical matches present.", 
+         true, vertMatch.hasMatch());
+      Assert.assertEquals("Matches detected when both match types present, with bacon.", 
+         true, bothMatch.hasMatch());
+   }
+   
+   @Test public void testSwapMakesMatch()
+   {
+      Assert.assertEquals("Bad swap returns false.", 
+         false, boardTemplate.swapMakesMatch(1, 1, 1, 3));
+      Assert.assertEquals("Good swap returns true.", 
+         true, boardTemplate.swapMakesMatch(1, 1, 1, 2));
    }
 }
