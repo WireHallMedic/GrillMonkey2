@@ -1,5 +1,5 @@
 !1514;s
-A
+J
 SAU0JGRASP_MAIN_BOUNDS=%<CONTROL_SHELL_BOUNDS>\012PATH+=%<JGRASP_PATHS>%;\012PATH=+%;%<JGRASP_C_PATHS>\012CYGWIN=nodosfilewarning\012GCC_COLORS=\012-Run\012ADD_EXE_PATH==Y\012
 SCU0JGRASP_MAIN_BOUNDS=%<CONTROL_SHELL_BOUNDS>\012PATH+=%<JGRASP_PATHS>%;\012PATH=+%;%<JGRASP_C_PATHS>\012CYGWIN=nodosfilewarning\012GCC_COLORS=\012-Run\012ADD_EXE_PATH==Y\012
 S+U0JGRASP_MAIN_BOUNDS=%<CONTROL_SHELL_BOUNDS>\012PATH+=%<JGRASP_PATHS>%;\012PATH=+%;%<JGRASP_C_PATHS>\012CYGWIN=nodosfilewarning\012GCC_COLORS=\012-Run\012ADD_EXE_PATH==Y\012
@@ -12,7 +12,7 @@ s#i0
 s#k0
 s#j0
 s#l0
-!632;g
+!672;g
 %\011GrillMonkey2%sGM2Constants.java
 %\011GrillMonkey2%sEngine%sSquirrelRNG.java
 %\011GrillMonkey2%sGUI%sAboutPanel.java
@@ -25,11 +25,12 @@ s#l0
 %\011GrillMonkey2%sGUI%sMenuPanel.java
 %\011GrillMonkey2%sGM2Main.java
 %\011GrillMonkey2%sGUI%sGM2Frame.java
+%\011GrillMonkey2%sEngine%sTileBag.java
 %\011GrillMonkey2%sEngine%sBoard.java
 %\011GrillMonkey2%sEngine%sGameState.java
 %\011GrillMonkey2%sEngine%sTile.java
 %\011GrillMonkey2%sGUI%sScorePanel.java
-!632;f
+!672;f
 %\011GrillMonkey2%sGM2Constants.java
 %\011GrillMonkey2%sEngine%sSquirrelRNG.java
 %\011GrillMonkey2%sGUI%sAboutPanel.java
@@ -42,9 +43,12 @@ s#l0
 %\011GrillMonkey2%sGUI%sMenuPanel.java
 %\011GrillMonkey2%sGM2Main.java
 %\011GrillMonkey2%sGUI%sGM2Frame.java
+%\011GrillMonkey2%sEngine%sTileBag.java
 %\011GrillMonkey2%sEngine%sBoard.java
 %\011GrillMonkey2%sEngine%sGameState.java
 %\011GrillMonkey2%sEngine%sTile.java
 %\011GrillMonkey2%sGUI%sScorePanel.java
 !42;l
 %\011GrillMonkey2%sEngine%sBoardTest.java
+!159;t
+jgrJUnit0xr	%\011GrillMonkey2%sEngine%sBoard.java	1647024009239:P%\011BoardTest.java	%\011GrillMonkey2%sEngine%sBoardTest.java	1647024009239:P%\011Board.java	
