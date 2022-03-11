@@ -4,48 +4,73 @@ import java.util.*;
 
 public class TileBag
 {
-   private static final int REGULAR_COPIES = 4;
-   private static final int BACON_COPIES = 1;
-   private static final int LIST_LENGTH = ((Tile.values().length - 1) * REGULAR_COPIES) + BACON_COPIES;
+   protected static final int REGULAR_COPIES = 4;
+   protected static final int BACON_COPIES = 1;
+   protected static final int LIST_LENGTH = ((Tile.values().length - 1) * REGULAR_COPIES) + BACON_COPIES;
    
-   private SquirrelRNG rng;
-   private Tile[] tileList;
-   private int drawIndex;
+   protected SquirrelRNG rng;
+   protected Vector<Tile> tileList;
+   protected int drawIndex;
    
    public TileBag(SquirrelRNG srng)
    {
+      drawIndex = 0;
       rng = srng;
-      tileList = new Tile[LIST_LENGTH];
+      tileList = new Vector<Tile>();
       createTiles();
       shuffle();
    }
    
-   private void createTiles()
+   protected void createTiles()
    {
-      Vector<Tile> tileVect = new Vector<Tile>();
       for(Tile newTile : Tile.values())
       {
          if(newTile != Tile.BACON)
          {
             for(int i = 0; i < REGULAR_COPIES; i++)
-               tileVect.add(newTile);
+               tileList.add(newTile);
          }
       }
       for(int i = 0; i < BACON_COPIES; i++)
-         tileVect.add(Tile.BACON);
+         tileList.add(Tile.BACON);
    }
    
    public Tile draw()
    {
-      Tile t = tileList[drawIndex];
+      Tile t = tileList.elementAt(drawIndex);
       drawIndex++;
-      if(drawIndex == tileList.length)
+      if(drawIndex == tileList.size())
          shuffle();
       return t;
    }
    
-   private void shuffle()
+   protected void shuffle()
    {
+      Vector<Tile> newTileList = new Vector<Tile>();
+      int randomIndex;
+      while(tileList.size() > 0)
+      {
+         randomIndex = rng.nextInt() % tileList.size();
+         newTileList.add(tileList.elementAt(randomIndex));
+         tileList.removeElementAt(randomIndex);
+      }
+      tileList = newTileList;
+      drawIndex = 0;
+   }
    
+   protected String serialize()
+   {
+      String outStr = "";
+      for(Tile tile : tileList)
+      {
+         outStr = outStr + tile.str + ", ";
+      }
+      outStr = outStr.substring(0, outStr.length() - 2);
+      return String.format("[%s]", outStr);
+   }
+   
+   protected void dump()
+   {
+      System.out.println(serialize());
    }
 }

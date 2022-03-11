@@ -46,7 +46,8 @@ s#l0
 %\011GrillMonkey2%sEngine%sGameState.java
 %\011GrillMonkey2%sEngine%sTile.java
 %\011GrillMonkey2%sGUI%sScorePanel.java
-!42;l
+!86;l
+%\011GrillMonkey2%sEngine%sTileBagTest.java
 %\011GrillMonkey2%sEngine%sBoardTest.java
 !159;t
 jgrJUnit0xr	%\011GrillMonkey2%sEngine%sBoard.java	1647024009239:P%\011BoardTest.java	%\011GrillMonkey2%sEngine%sBoardTest.java	1647024009239:P%\011Board.java	
