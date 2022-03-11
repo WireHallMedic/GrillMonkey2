@@ -46,6 +46,17 @@ public class TileBagTest extends TileBag
       Assert.assertTrue(hasMismatch);
    }
 
+
+   @Test public void copyTest() 
+   {
+      TileBag that = this.copy();
+      for(int i = 0; i < 100; i++)
+      {
+         Assert.assertEquals("Draws of copy and original match.",
+            this.draw(), that.draw());
+      }
+   }
+
    /*
    @Test public void dumpContents() 
    {

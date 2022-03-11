@@ -58,6 +58,20 @@ public class TileBag
       drawIndex = 0;
    }
    
+   // get deep copy
+   public TileBag copy()
+   {
+      TileBag that = new TileBag(this.rng.copy());
+      that.tileList = new Vector<Tile>();
+      for(int i = 0; i < tileList.size(); i++)
+      {
+         that.tileList.add(tileList.elementAt(i));
+      }
+      that.drawIndex = this.drawIndex;
+      that.rng = this.rng.copy(); // have to reset it because shuffle() is called in creation
+      return that;
+   }
+   
    protected String serialize()
    {
       String outStr = "";

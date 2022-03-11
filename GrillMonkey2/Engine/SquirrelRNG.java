@@ -35,6 +35,14 @@ public class SquirrelRNG
       this((int)System.currentTimeMillis());
    }
    
+   // get deep copy
+   public SquirrelRNG copy()
+   {
+      SquirrelRNG that = new SquirrelRNG(this._seed);
+      that.lastIndexed = this.lastIndexed;
+      return that;
+   }
+   
    // set seed
    public void setSeed(int s)
    {
