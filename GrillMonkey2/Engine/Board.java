@@ -6,20 +6,27 @@ import java.util.*;
 public class Board implements GM2Constants
 {
    protected Tile[][] tile;
+   protected TileBag tileBag;
    
-   public Board()
+   public Board(TileBag bag)
    {
       tile = new Tile[BOARD_WIDTH][BOARD_HEIGHT];
+      tileBag = bag;
    }
    
    public Board(Board that)
    {
-      this();
+      this(that.tileBag.copy());
       for(int x = 0; x < BOARD_WIDTH; x++)
       for(int y = 0; y < BOARD_HEIGHT; y++)
       {
          this.tile[x][y] = that.tile[x][y];
       }
+   }
+   
+   public static Board getMockBoard()
+   {
+      return new Board(TileBag.getMockTileBag());
    }
    
    public boolean isInBounds(int x, int y)
@@ -177,6 +184,18 @@ public class Board implements GM2Constants
       }
       return matchList;
    }
+   
+   
+   // all tiles over an empty space move down one
+   public void performGravitySnap()
+   {
+      for(int y = BOARD_HEIGHT - 1; y > 0; y--)
+      for(int x = 0; x < BOARD_WIDTH; x++)
+      {
+      
+      }
+   }
+   
    
    public void dump()
    {

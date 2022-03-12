@@ -21,6 +21,11 @@ public class TileBag
       shuffle();
    }
    
+   public static TileBag getMockTileBag()
+   {
+      return new TileBag(new SquirrelRNG(123456789));
+   }
+   
    protected void createTiles()
    {
       for(Tile newTile : Tile.values())
