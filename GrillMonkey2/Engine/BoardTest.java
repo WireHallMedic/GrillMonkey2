@@ -125,4 +125,15 @@ public class BoardTest
       Assert.assertTrue(boardTemplate.getTile(4, 0) == null);
       Assert.assertTrue(boardTemplate.getTile(4, 1) == null);
    }
+   
+   
+   @Test public void testFillHoles()
+   {
+      // no holes
+      Assert.assertFalse(boardTemplate.hasHoles());
+      boardTemplate.setTile(3, 10, null);
+      Assert.assertTrue(boardTemplate.hasHoles());
+      boardTemplate.fillHoles();
+      Assert.assertFalse(boardTemplate.hasHoles());
+   }
 }

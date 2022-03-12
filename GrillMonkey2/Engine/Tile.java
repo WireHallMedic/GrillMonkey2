@@ -25,4 +25,13 @@ public enum Tile
    {
       return this == that || this == BACON|| that == BACON;
    }
+   
+   // will return null for ' '
+   public static Tile getByChar(char c)
+   {
+      for(Tile tile : Tile.values())
+         if(tile.character == c)
+            return tile;
+      return null;
+   }
 }

@@ -228,14 +228,27 @@ public class Board implements GM2Constants
       return false;
    }
    
-   protected boolean isVerticalWell(int xOrigin, int yOrigin)
+   protected boolean hasHoles()
    {
-      for(int y = yOrigin; y <= 0; y--)
+      for(int x = 0; x < BOARD_WIDTH; x++)
       {
-         if(getTile(xOrigin, y) != null)
-            return false;
+         for(int y = 0; y < BOARD_HEIGHT; y++)
+         {
+            if(getTile(x, y) == null)
+               return true;
+         }
       }
-      return true;
+      return false;
+   }
+   
+   public void fillHoles()
+   {
+      for(int y = BOARD_HEIGHT - 1; y > 0; y--)
+      for(int x = 0; x < BOARD_WIDTH; x++)
+      {
+         if(getTile(x, y) == null)
+            setTile(x, y, tileBag.draw());
+      }
    }
    
    
