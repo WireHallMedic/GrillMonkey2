@@ -186,14 +186,67 @@ public class Board implements GM2Constants
    }
    
    
-   // all tiles over an empty space move down one
-   public void performGravitySnap()
+   // all tiles over an empty space move to fill
+   public void dropTiles()
    {
-      for(int y = BOARD_HEIGHT - 1; y > 0; y--)
+      while(areInteriorHoles())
+      {
+         for(int y = BOARD_HEIGHT - 1; y > 0; y--)
+         for(int x = 0; x < BOARD_WIDTH; x++)
+         {
+            if(getTile(x, y) == null)
+            {
+               setTile(x, y, getTile(x, y - 1));
+               setTile(x, y - 1, null);
+            }
+         }
+      }
+   }
+   
+   protected boolean areInteriorHoles()
+   {
       for(int x = 0; x < BOARD_WIDTH; x++)
       {
-      
+         boolean stackTopFound = false;
+         for(int y = 0; y < BOARD_HEIGHT; y++)
+         {
+            // have found top of stack
+            if(stackTopFound)
+            {
+               // hole under tile, there are interior holes
+               if(getTile(x, y) == null)
+                  return true;
+            }
+            else
+            // haven't found top of stack yet
+            {
+               if(getTile(x, y) != null)
+                  stackTopFound = true;
+            }
+         }
       }
+      return false;
+   }
+   
+   protected boolean isVerticalWell(int xOrigin, int yOrigin)
+   {
+      for(int y = yOrigin; y <= 0; y--)
+      {
+         if(getTile(xOrigin, y) != null)
+            return false;
+      }
+      return true;
+   }
+   
+   
+   // null-safe method for checking tile values
+   public char getTileChar(int x, int y)
+   {
+      Tile tile = getTile(x, y);
+      if(tile == null)
+         return ' ';
+      else
+         return tile.character;
    }
    
    
@@ -203,10 +256,7 @@ public class Board implements GM2Constants
       {
          for(int x = 0; x < BOARD_WIDTH; x++)
          {
-            if(tile[x][y] == null)
-               System.out.print("!");
-            else
-               System.out.print("" + tile[x][y].ordinal());
+            System.out.print(getTileChar(x, y));
          }
          System.out.println();
       }

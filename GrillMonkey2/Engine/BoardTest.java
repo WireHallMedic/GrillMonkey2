@@ -6,7 +6,7 @@ import org.junit.Before;
 import org.junit.Test;
 
 
-public class BoardTest extends Board
+public class BoardTest
 {
    private Board boardTemplate;      
    private Board vertMatch;
@@ -15,7 +15,7 @@ public class BoardTest extends Board
    
    @Before public void setUp()
    {
-      boardTemplate = new Board();
+      boardTemplate = new Board(TileBag.getMockTileBag());
       
       for(int x = 0; x < Board.BOARD_WIDTH; x++)
       for(int y = 0; y < Board.BOARD_HEIGHT; y += 2)
@@ -93,5 +93,36 @@ public class BoardTest extends Board
          false, boardTemplate.swapMakesMatch(1, 1, 1, 3));
       Assert.assertEquals("Good swap returns true.", 
          true, boardTemplate.swapMakesMatch(1, 1, 1, 2));
+   }
+   
+   @Test public void testDropTiles()
+   {
+      // no holes
+      Assert.assertFalse(boardTemplate.getTile(3, 10) == null);
+      Assert.assertFalse(boardTemplate.getTile(4, 10) == null);
+      Assert.assertFalse(boardTemplate.getTile(4, 9) == null);
+      Assert.assertFalse(boardTemplate.getTile(3, 0) == null);
+      Assert.assertFalse(boardTemplate.getTile(4, 0) == null);
+      Assert.assertFalse(boardTemplate.getTile(4, 1) == null);
+      
+      boardTemplate.setTile(3, 10, null);
+      boardTemplate.setTile(4, 10, null);
+      boardTemplate.setTile(4, 9, null);
+      
+      Assert.assertTrue(boardTemplate.getTile(3, 10) == null);
+      Assert.assertTrue(boardTemplate.getTile(4, 10) == null);
+      Assert.assertTrue(boardTemplate.getTile(4, 9) == null);
+      Assert.assertFalse(boardTemplate.getTile(3, 0) == null);
+      Assert.assertFalse(boardTemplate.getTile(4, 0) == null);
+      Assert.assertFalse(boardTemplate.getTile(4, 1) == null);
+      
+      boardTemplate.dropTiles();
+      
+      Assert.assertFalse(boardTemplate.getTile(3, 10) == null);
+      Assert.assertFalse(boardTemplate.getTile(4, 10) == null);
+      Assert.assertFalse(boardTemplate.getTile(4, 9) == null);
+      Assert.assertTrue(boardTemplate.getTile(3, 0) == null);
+      Assert.assertTrue(boardTemplate.getTile(4, 0) == null);
+      Assert.assertTrue(boardTemplate.getTile(4, 1) == null);
    }
 }

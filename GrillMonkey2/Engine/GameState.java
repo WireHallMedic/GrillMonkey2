@@ -8,12 +8,17 @@ public class GameState implements GM2Constants
    protected int[] click1;
    protected int[] click2;
    
-   public GameState()
+   public GameState(TileBag tileBag)
    {
-      board = new Board();
+      board = new Board(tileBag);
       click1 = new int[2];
       click2 = new int[2];
       clearClicks();
+   }
+   
+   public static GameState getMockGameState()
+   {
+      return new GameState(TileBag.getMockTileBag());
    }
    
    public void clearClicks()
@@ -22,7 +27,7 @@ public class GameState implements GM2Constants
      clearClick(2);
    }
    
-   public boolean clearClick(int index)
+   public void clearClick(int index)
    {
       switch(index)
       {
@@ -42,6 +47,7 @@ public class GameState implements GM2Constants
          case 1 : return click1[0] != -1 && click1[1] != -1;
          case 2 : return click2[0] != -1 && click2[1] != -1;
       }
+      return false;
    }
    
    public void removeTile(int x, int y)
@@ -51,7 +57,7 @@ public class GameState implements GM2Constants
    
    public boolean canSwapTiles(int x1, int y1, int x2, int y2)
    {
-      return board.canSwapTiles(x1, y1, x2, y2);
+      return board.swapMakesMatch(x1, y1, x2, y2);
    }
    
    public void swapTiles(int x1, int y1, int x2, int y2)
