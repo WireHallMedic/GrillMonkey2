@@ -136,4 +136,26 @@ public class BoardTest
       boardTemplate.fillHoles();
       Assert.assertFalse(boardTemplate.hasHoles());
    }
+   
+   
+   @Test public void testMatchRemoval()
+   {
+      Assert.assertFalse(vertMatch.hasHoles());
+      vertMatch.removeMatches();
+      Assert.assertTrue(vertMatch.hasHoles());
+      Assert.assertTrue(vertMatch.getTile(4, 3) != null);
+      Assert.assertTrue(vertMatch.getTile(4, 4) == null);
+      Assert.assertTrue(vertMatch.getTile(4, 5) == null);
+      Assert.assertTrue(vertMatch.getTile(4, 6) == null);
+      Assert.assertTrue(vertMatch.getTile(4, 7) != null);
+      
+      Assert.assertFalse(horizMatch.hasHoles());
+      horizMatch.removeMatches();
+      Assert.assertTrue(horizMatch.hasHoles());
+      Assert.assertTrue(horizMatch.getTile(3, 4) != null);
+      Assert.assertTrue(horizMatch.getTile(4, 4) == null);
+      Assert.assertTrue(horizMatch.getTile(5, 4) == null);
+      Assert.assertTrue(horizMatch.getTile(6, 4) == null);
+      Assert.assertTrue(horizMatch.getTile(7, 4) != null);
+   }
 }

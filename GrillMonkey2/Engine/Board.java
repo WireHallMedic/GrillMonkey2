@@ -203,6 +203,7 @@ public class Board implements GM2Constants
       }
    }
    
+   
    protected boolean areInteriorHoles()
    {
       for(int x = 0; x < BOARD_WIDTH; x++)
@@ -228,6 +229,7 @@ public class Board implements GM2Constants
       return false;
    }
    
+   
    protected boolean hasHoles()
    {
       for(int x = 0; x < BOARD_WIDTH; x++)
@@ -240,6 +242,32 @@ public class Board implements GM2Constants
       }
       return false;
    }
+   
+   
+   public void removeMatches()
+   {
+      Vector<MatchObj> matchList = getMatches();
+      for(MatchObj match : matchList)
+      {
+         removeMatch(match);
+      }
+   }
+   
+   
+   protected void removeMatch(MatchObj match)
+   {
+      if(match.vertical)
+      {
+         for(int y = 0; y < match.length; y++)
+            setTile(match.xLoc, match.yLoc + y, null);
+      }
+      else // horizontal match
+      {
+         for(int x = 0; x < match.length; x++)
+            setTile(match.xLoc + x, match.yLoc, null);
+      }
+   }
+   
    
    public void fillHoles()
    {
