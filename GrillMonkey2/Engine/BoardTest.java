@@ -132,7 +132,9 @@ public class BoardTest
       // no holes
       Assert.assertFalse(boardTemplate.hasHoles());
       boardTemplate.setTile(3, 10, null);
+      // holes
       Assert.assertTrue(boardTemplate.hasHoles());
+      // no holes
       boardTemplate.fillHoles();
       Assert.assertFalse(boardTemplate.hasHoles());
    }

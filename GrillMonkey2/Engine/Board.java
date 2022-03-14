@@ -26,7 +26,9 @@ public class Board implements GM2Constants
    
    public static Board getMockBoard()
    {
-      return new Board(TileBag.getMockTileBag());
+      Board board = new Board(TileBag.getMockTileBag());
+      board.randomFill();
+      return board;
    }
    
    public boolean isInBounds(int x, int y)
@@ -45,6 +47,16 @@ public class Board implements GM2Constants
    {
       if(isInBounds(x, y))
          tile[x][y] = t;
+   }
+   
+   public void randomFill()
+   {
+      for(int x = 0; x < BOARD_WIDTH; x++)
+      for(int y = 0; y < BOARD_HEIGHT; y++)
+      {
+        setTile(x, y, tileBag.draw());
+      }
+      
    }
    
    public boolean swapTiles(int x1, int y1, int x2, int y2)
@@ -271,7 +283,7 @@ public class Board implements GM2Constants
    
    public void fillHoles()
    {
-      for(int y = BOARD_HEIGHT - 1; y > 0; y--)
+      for(int y = BOARD_HEIGHT - 1; y >= 0; y--)
       for(int x = 0; x < BOARD_WIDTH; x++)
       {
          if(getTile(x, y) == null)
